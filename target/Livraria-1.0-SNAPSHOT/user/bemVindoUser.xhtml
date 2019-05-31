@@ -1,12 +1,60 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Bem vindo usuario
+        <h:form id="form">
+            <p:growl id="growl" showDetail="true" sticky="true"/>
+            <p:panel>
+                <div align="center" >
+                    <h:panelGrid>
+
+                        <p:outputLabel for="titulo" value="Titulo:"/>
+                        <p:inputText id="titulo" required="true" value="#{livro.livro.titulo}" requiredMessage="Titulo nao pode ser vazio"/>
+                        <p:message for="titulo"/>
+
+                        <p:outputLabel for="autor" value="Autor:" />
+                        <p:inputText id="autor" value="#{livro.livro.autor}" required="true" requiredMessage="Autor nao pode ser vazio" />
+                        <p:message for="autor" />
+
+                        <p:outputLabel for="nota" value="Nota:" />
+                        <p:inputNumber id="nota" value="#{livro.livro.nota}" required="true" requiredMessage="Nota nao pode ser vazio"/>
+                        <p:message for="nota" />
+
+                        <p:commandButton value="salvar" action="#{livro.salvar()}" update="form,form2"/>
+                    </h:panelGrid>
+                </div>
+            </p:panel>
+        </h:form>
+        <h:form id="form2">
+            <p:growl id="growl" showDetail="true" sticky="true"/>
+            <p:fieldset legend="Meus Livros">
+                <p:dataTable id="tabela" value="#{sessionScope['usuario-logado'].listaLivros}" var="lista">
+
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{lista.titulo}" />
+                    </p:column>
+
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{lista.autor}" />
+                    </p:column>
+
+                    <p:column headerText="Nota">
+                        <h:outputText value="#{lista.nota}" />
+                    </p:column>
+
+                    <p:column headerText="Ações">
+                        <p:commandButton value="Editar" action="#{livro.editarLivro(lista)}" update="form"/>
+                        <p:commandButton value="Excluir" action="#{livro.removerLivro(lista)}" update="form2"/> <br/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
     </h:body>
 </html>
 

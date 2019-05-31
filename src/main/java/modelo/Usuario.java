@@ -5,22 +5,27 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author lucas
  */
-public class Usuario {
+public class Usuario extends Livro{
     private String nome;
     private String telefone;
     private Date dataNascimento;
     private String cpf;
     private String login;
     private String senha;
+    private List<Livro> listaLivros;
     private boolean admin;
 
     public Usuario() {
+        admin = false;
+        this.listaLivros = new ArrayList<Livro>();
     }
 
     public Usuario(String nome, String telefone, Date dataNascimento, String cpf, String login, String senha, boolean admin) {
@@ -31,6 +36,7 @@ public class Usuario {
         this.login = login;
         this.senha = senha;
         this.admin = admin;
+        this.listaLivros = new ArrayList<Livro>();
     }
     
     public String getNome() {
@@ -87,6 +93,14 @@ public class Usuario {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public List<Livro> getListaLivros() {
+        return listaLivros;
+    }
+
+    public void setListaLivros(List<Livro> listaLivros) {
+        this.listaLivros = listaLivros;
     }
     
     

@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ import modelo.Usuario;
  * @author lucas
  */
 @ManagedBean(name = "login", eager = true)
-@ApplicationScoped
+@RequestScoped
 public class LoginBean {
 
     @ManagedProperty(value = "#{livraria.listaUsuario}")
